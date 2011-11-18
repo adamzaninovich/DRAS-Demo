@@ -37,7 +37,7 @@ class DRAS
   def check
     @http.start do |http|
       req = Net::HTTP::Get.new(@endpoint)
-      req.basic_auth(*@auth) unless @auth.nil?
+      req.basic_auth(*@auth) if @auth.is_a? Array
       response = http.request(req)
       doc = Nokogiri::XML(response.body)
       
