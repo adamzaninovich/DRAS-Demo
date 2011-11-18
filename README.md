@@ -6,7 +6,7 @@ Release 1.5, 15 July 2011
  
 Introduction
 ------------
-This package contains documentation and sample ruby code for accessing the Akuacom OpenADR DRAS client REST web service (RestWS). Complete documentation for the OpenADR client interfaces can be found at [http://openadr.lbl.gov](http://openadr.lbl.gov/).
+This package contains documentation and sample ruby code for accessing the Akuacom OpenADR DRAS client REST web service (RestWS). Complete documentation for the OpenADR client interfaces can be found at [openadr.lbl.gov](http://openadr.lbl.gov/).
  
 The RestWS provides DRAS clients with a simple method for retrieving DRAS event information over the Internet. Making a single HTTP GET method call on the DRAS will return all the event information for the client in XML. Akuacom recommends making the HTTP GET method call once per minute.
  
@@ -21,7 +21,7 @@ On production servers, only the SSL versions are available.
 
 Schema
 ------
-The EventState.xsd schema is available on the OpenADR archive site at [http://openadr.lbl.gov/src/1/EventState.xsd](http://openadr.lbl.gov/src/1/EventState.xsd)
+The EventState.xsd schema is available on the OpenADR archive site at [openadr.lbl.gov/src/1/EventState.xsd](http://openadr.lbl.gov/src/1/EventState.xsd)
 
 Simple DRAS Client
 ------------------
@@ -62,5 +62,4 @@ If the returned XML was empty, all relays would be turned off.
 
 Example Ruby Client
 -------------------
-
-...
+See a demo of this running at [drasdemo.heroku.com](http://drasdemo.heroku.com/).
