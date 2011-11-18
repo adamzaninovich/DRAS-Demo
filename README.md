@@ -30,8 +30,9 @@ A typical simple DRAS client only needs to parse the EventStatus and OperationMo
 The OperationModeValue value is used to indicate the current shed level for the facility: NORMAL, MODERATE, or HIGH. A value of NORMAL indicates that no shed is being requested. MODERATE and HIGH are relative shed levels, HIGH requesting the maximum shed the facility is programmed for, and MODERATE being somewhere between HIGH and NORMAL. Exactly how these levels control the facility is left up the controls vendor and facility owner depending on desired DR performance and facility comfort.
  
 The EventStatus value is used to indicate where in the event cycle the client is. FAR and NEAR are relative indications that an event has been issued and the start time is approaching. These values could be used to prepare a facility for the upcoming event by triggering behaviors such as pre-cooling. ACTIVE indicates that the client is between the start and end times of the event. When the EventStatus is ACTIVE, the OperationModeValue should be inspected to see what shed level is being indicated.
+
 Simple DRAS Gateway
- 
+------------------- 
 A simple DRAS client acting as a gateway to the facility energy management and control system might turn the OperationModeValue and EventStatus values into relay outputs. The particular mapping of values to relay outputs described below was chosen to be compatible with the Akuacom CLIR legacy DRAS client.
  
 Using two relays for OperationModeValue, NORMAL would turn off both relays, MODERATE would turn on relay 1 and turn off relay 2, and HIGH would turn on both relays.
