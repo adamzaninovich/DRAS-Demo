@@ -1,13 +1,12 @@
 require 'net/http'
 require 'net/https'
 require 'nokogiri'
-
-# TODO: add confirmation
+require 'builder'
 
 class DRAS
   
   attr_reader :site,:endpoint, :confirmation_endpoint, :port,
-              :event_status, :operation_mode_value, :last_check, :ssl
+              :event_status, :operation_mode_value, :last_check, :confirmation, :ssl
     
   def initialize(opts)
     @last_check           = "NEVER"
@@ -60,8 +59,46 @@ class DRAS
       
       @event_status          = doc.xpath("//p:EventStatus").first.text
       @operation_mode_value  = doc.xpath("//p:OperationModeValue").first.text
+      
+      eventStates = doc.xpath("p:listOfEventState/p:eventStates")
+      @confirm_attributes = {
+        currentTime:            doc.xpath("//p:currentTime").first.text,
+        drasClientID:           eventStates.attribute('drasClientID').value,
+        eventIdentifier:        eventStates.attribute('eventIdentifier').value,
+        eventModNumber:         eventStates.attribute('eventModNumber').value,
+        eventStateID:           eventStates.attribute('eventStateID').value,
+        operationModeValue:     @operation_mode_value,
+        programName:            eventStates.attribute('programName').value,
+        schemaVersion:          eventStates.attribute('schemaVersion').value,
+        optInStatus:            true,
+        'xmlns:p'            => "urn:EventState",
+        'xmlns:xsi'          => "http://www.w3.org/2001/XMLSchema-instance",
+        'xsi:schemaLocation' => "http://openadr.lbl.gov/src/1/EventState.xsd"
+      }
+      
     end
+    
+    puts "WARNING: Confirmation failed" unless confirm
+    
     yield if block_given?
+  end
+  
+  def confirm
+    unless @confirm_attributes.nil?
+      xml = Builder::XmlMarkup.new
+      xml.instruct!
+      xml.p :eventStateConfirmation, @confirm_attributes
+      
+      @http.start do |http|
+        req = Net::HTTP::Post.new(@confirmation_endpoint)
+        req.basic_auth(*@auth) if @auth.is_a? Array
+        req.body = xml.target!
+        response = http.request(req)
+        @confirmation = response.body
+      end
+      
+      return @confirmation =~ /SUCCESS/
+    end
   end
   
 end
