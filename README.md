@@ -70,8 +70,3 @@ To Use:
 * run `bundle install`
 * run `bundle exec thin start -p 3000`
 * open localhost:3000 in your browser
-
-TODO
-----
-
-* Add confirmation
