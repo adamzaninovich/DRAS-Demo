@@ -1,14 +1,15 @@
 require 'sinatra'
+require 'yaml'
 require File.dirname(__FILE__) + '/lib/dras'
 
 class DrasDemo < Sinatra::Base
   
   def initialize(*args)
     super(*args)
-    @dras = DRAS.new  "cdp.openadr.com",
-                      "/RestClientWS/rest2",
-                      "/RestClientWS/restConfirm",
-                      ssl:true, auth: ['akua.client1','Test_1234']
+    
+    @config = YAML.load(File.read(File.dirname(__FILE__) + '/config/config.yml'))['dras']
+    
+    @dras = DRAS.new @config
   end
   
   get '/' do
@@ -22,9 +23,10 @@ class DrasDemo < Sinatra::Base
     "a:hover{color: #eb0077;text-decoration: none;background: #181818;}" +
     "</style></head>" + 
     "<body><h1>DRAS Demo</h1>" + 
-    "<p>End point: #{(@dras.ssl ? 'https://' : 'http://')}#{@dras.site}#{@dras.endpoint}</p>" +
-    "<p>Last result: #{@dras.operation_mode_value} operation was #{@dras.event_status} at #{@dras.last_check}</p>" + 
-    "<p><a href='/check'>check again</a></p></body></html>"
+    "<p>Account: #{@config['auth']['user']}" +
+    "<p>End point: #{(@dras.ssl ? 'https://' : 'http://')}#{@dras.site}:#{@dras.port}#{@dras.endpoint}</p>" +
+    "<p>Last result: #{@dras.operation_mode_value} operation was #{@dras.event_status} (#{@dras.last_check})</p>" + 
+    "<p><a href='/check'>udpate</a></p></body></html>"
   end
   
   get '/check' do

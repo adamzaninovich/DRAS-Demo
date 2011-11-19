@@ -1,0 +1,9 @@
+dras:
+  site:       "cdp.openadr.com"
+  endpoint:   "/RestClientWS/rest2"
+  confirm_ep: "/RestClientWS/restConfirm"
+  use_ssl:    true
+  cache:      "cache"
+  auth:
+    user:     "cfirr.test"
+    pass:     "Test_1234"

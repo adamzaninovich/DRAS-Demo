@@ -1,8 +1,6 @@
-Akuacom DRAS OpenADR Client
-===========================
-REST Web Service
-----------------
-Release 1.5, 15 July 2011
+Akuacom DRAS OpenADR Ruby Client
+================================
+Release 1.0, 18 November 2011, by Adam Zaninovich
  
 Introduction
 ------------
@@ -64,3 +62,11 @@ If the returned XML was empty, all relays would be turned off.
 Example Ruby Client
 -------------------
 See a demo of this running at [drasdemo.heroku.com](http://drasdemo.heroku.com/).
+
+To Use:
+
+* udpate config/config.yml with your credentials
+* run `gem install bundler`
+* run `bundle install`
+* run `bundle exec thin start -p 3000`
+* open localhost:3000 in your browser
