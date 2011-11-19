@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>Akuacom DRAS OpenADR Ruby Client Demo</title>
+  <style>
+    body{color: #181818;margin:40px 0 0 40px;font: 16px/24px helvetica;}
+    a{color: #181818;text-decoration: underline;padding: 4px 4px 2px;}
+    a:hover{color: #B4FFC6;text-decoration: none;background: #181818;}
+    table{margin-top:40px;}
+    th{text-align:right;background: #B4FFC6;}
+    td{text-align:left;background: #181818; color: #B4FFC6;}
+    th,td{padding: 4px 4px 2px;}
+    tr+tr td{border-top:1px solid #B4FFC6;}
+    tr+tr th{border-top:1px solid #181818;}
+  </style>
+</head>
+<body>
+  <h1>Akuacom DRAS OpenADR Ruby Client Demo</h1>
+  <table border="0" cellspacing="0">
+    <tr>
+      <th>Client Account</th>
+      <td><%= @config['auth']['user'] %></td>
+    </tr>
+    <tr>
+      <th>REST End Point</th>
+      <td><%= (@dras.ssl ? 'https://' : 'http://') %><%= @dras.site %>:<%= @dras.port %><%= @dras.endpoint %></td>
+    </tr>
+    <tr>
+      <th>Operation</th>
+      <td><%= @dras.operation_mode_value %></td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td><%= @dras.event_status %></td>
+    </tr>
+    <tr>
+      <th>Update Time</th>
+      <td><%= @dras.last_check %></td>
+    </tr>
+  </table>
+  <a href='/check'>udpate</a>
+  <p><a href='http://github.com/adamzaninovich/DRAS-Demo'>get the code and more information at github</a></p>
+</body>
+</html>
