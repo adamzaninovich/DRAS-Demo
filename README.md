@@ -65,7 +65,7 @@ See a demo of this running at [drasdemo.heroku.com](http://drasdemo.heroku.com/)
 
 To Use:
 
-* udpate config/config.yml with your credentials
+* update config/config.yml with your credentials
 * run `gem install bundler`
 * run `bundle install`
 * run `bundle exec thin start -p 3000`
