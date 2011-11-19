@@ -3,7 +3,7 @@ dras:
   endpoint:   "/RestClientWS/rest2"
   confirm_ep: "/RestClientWS/restConfirm"
   use_ssl:    true
-  cache:      "cache"
+  cache:      false
   auth:
     user:     "cfirr.test"
     pass:     "Test_1234"
