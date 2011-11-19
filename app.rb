@@ -26,7 +26,8 @@ class DrasDemo < Sinatra::Base
     "<p>Account: #{@config['auth']['user']}" +
     "<p>End point: #{(@dras.ssl ? 'https://' : 'http://')}#{@dras.site}:#{@dras.port}#{@dras.endpoint}</p>" +
     "<p>Last result: #{@dras.operation_mode_value} operation was #{@dras.event_status} (#{@dras.last_check})</p>" + 
-    "<p><a href='/check'>udpate</a></p></body></html>"
+    "<a href='/check'>udpate</a></p>" +
+    "<p><a href='https://github.com/adamzaninovich/DRAS-Demo'>see the code at github</a></p></body></html>"
   end
   
   get '/check' do
